@@ -1,0 +1,11 @@
+#answersSection{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 25%;
+}
+#answersSection button{
+    flex: 1 1 25%;
+    width: fit-content;
+    margin: 3%;
+}
