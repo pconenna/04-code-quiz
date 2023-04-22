@@ -7,29 +7,51 @@ var option2 = document.querySelector("#option2");
 var option3 = document.querySelector("#option3");
 var option4 = document.querySelector("#option4");
 
-var questions = {
+
+var quiz = {
     question1: {
-        question: "Which one of these it not a real programming language?",
-        option1: "JavaScript",
-        option2: "Python",
-        option3: "Bungerscript",
-        option4: "C#"
+        question: "Which one of these is not a real programming language?",
+        choice1: "JavaScript",
+        choice2: "Python",
+        choice3: "Bungerscript",
+        choice4: "C#"
     },
     question2: {
         question: "What language was Minecraft originally written in?",
-        option1: "Python",
-        option2: "Java",
-        option3: "Kotlin",
-        option4: "C#"
+        choice1: "Python",
+        choice2: "Java",
+        choice3: "Kotlin",
+        choice4: "C#"
+    },
+    question3: {
+        question: "What is a variable?",
+        choice1: "A container to store data",
+        choice2: "something",
+        choice3: "something else",
+        choice4: "another wrong answer"
     }
+
 }
-//starts quizby hiding the intro and showing a question
+var currentQuestion = quiz.question1;
+var questionIndex = 0;
+//starts quiz by hiding the intro and showing a question
 btnStart.addEventListener("click",function(){
     introSection.setAttribute("class","sectionHide");
     answersSection.setAttribute("class","sectionShow")
-    questionH2.innerHTML = questions.question1.question;
-    option1.textContent = questions.question1.option1;
-    option2.textContent = questions.question1.option2;
-    option3.textContent = questions.question1.option3;
-    option4.textContent = questions.question1.option4;
+    nextQuestion();
 })
+option1.addEventListener("click",nextQuestion);
+option2.addEventListener("click",nextQuestion);
+option3.addEventListener("click",nextQuestion);
+option4.addEventListener("click",nextQuestion);
+
+ function nextQuestion(){
+    var quizKeys = Object.keys(quiz);
+    currentQuestion = quiz[quizKeys[questionIndex]];
+    questionH2.innerHTML = currentQuestion.question;
+    option1.textContent = currentQuestion.choice1;
+    option2.textContent = currentQuestion.choice2;
+    option3.textContent = currentQuestion.choice3;
+    option4.textContent = currentQuestion.choice4;
+    questionIndex++;
+ }
