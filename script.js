@@ -6,6 +6,7 @@ var option1 = document.querySelector("#option1");
 var option2 = document.querySelector("#option2");
 var option3 = document.querySelector("#option3");
 var option4 = document.querySelector("#option4");
+var scoreDisplay = document.querySelector("#score");
 var score = 0;
 var highScore = 0;
 
@@ -37,7 +38,9 @@ var questionIndex = 0;
 //starts quiz by hiding the intro and showing a question
 btnStart.addEventListener("click",function(event){
     introSection.setAttribute("class","sectionHide");
-    answersSection.setAttribute("class","sectionShow")
+    answersSection.setAttribute("class","sectionShow");
+    scoreDisplay.innerHTML = score;
+
     nextQuestion();
 })
 
@@ -61,15 +64,21 @@ btnStart.addEventListener("click",function(event){
 }
 
 function checkAnswer(event){
+    var currentQuestion = arr[questionIndex]
     var target = event.target;
     console.log(target.value);
+    questionIndex++;
 
+    if(target.value === currentQuestion.rightAnswer){
+        score++;
+        scoreDisplay.innerHTML = score;
 
-    questionIndex++
+    }
     //check if any questions left
     // if(questionIndex !==7){
 
     // }else{
+        console.log(score);
 
         nextQuestion();
     // }
