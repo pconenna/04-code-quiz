@@ -8,9 +8,11 @@ var option2 = document.querySelector("#option2");
 var option3 = document.querySelector("#option3");
 var option4 = document.querySelector("#option4");
 var scoreDisplay = document.querySelector("#score");
+var timeLeft = document.querySelector("#timeLeft");
+var secondsLeft = 60;
 
 var score = 0;
-var highScore = 0;
+var highScore = localStorage.getItem("highScore");
 
 var quiz = [{
     question: "Which one of these is not a real programming language?",
@@ -47,9 +49,8 @@ var questionIndex = 0;
 //starts quiz by hiding the intro and showing a question
 btnStart.addEventListener("click",function(event){
     introSection.setAttribute("class","sectionHide");
+    countDown();
     answersSection.setAttribute("class","sectionShow");
-    scoreDisplay.innerHTML = score;
-
     nextQuestion();
 })
 
@@ -80,19 +81,16 @@ function checkAnswer(event){
 
     if(target.value === currentQuestion.rightAnswer){
         score++;
-        scoreDisplay.innerHTML = score;
-
-    } console.log(score);
-    //check if any questions left
-    if(questionIndex === quiz.length){
-        answersSection.setAttribute("class","sectionHide");
-        doneSection.setAttribute("class", "sectionShow");
-
-
 
     }else{
-       
-
+        // dedeuct more time if answer is wrong
+        secondsLeft -=3;
+    }
+     console.log(score);
+    //check if any questions left
+    if(questionIndex === quiz.length){
+        endQuiz();
+    }else{
         nextQuestion();
     }
  }
@@ -101,3 +99,33 @@ function checkAnswer(event){
  option2.addEventListener("click",checkAnswer)
  option3.addEventListener("click",checkAnswer)
  option4.addEventListener("click",checkAnswer)
+
+ function countDown(){
+    var timerInterval = setInterval(function(){
+        secondsLeft--;
+        timeLeft.innerHTML = secondsLeft;
+
+        // stop timer if user successfully gets to the end of the quiz
+        if(questionIndex === quiz.length){
+            clearInterval(timerInterval);
+        }
+
+        if(secondsLeft === 0){
+            clearInterval(timerInterval);
+            endQuiz();
+        }
+    },1000)
+ }
+
+ function checkHighScore(){
+    if(score > highScore){
+        highScore = score;
+        localStorage.setItem("highScore", highScore);
+    }
+ }
+
+ function endQuiz(){
+        answersSection.setAttribute("class","sectionHide");
+        doneSection.setAttribute("class", "sectionShow");
+        scoreDisplay.innerHTML = score;
+ }
