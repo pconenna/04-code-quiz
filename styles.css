@@ -9,15 +9,30 @@
     flex: 1 1 auto;
     flex-direction: column;
     flex-wrap: wrap;
-    /* width: 25%; */
+    width: 50%;
     align-items: center;
+}
+/* made the intro narrower to make it look better for now */
+#intro{
+    width: 20%
 }
  button{
     flex: 1 1 100%;
-    width: fit-content;
+    width: 95%;
     margin: 1%;
 }
 
 .sectionHide{
     display: none;
 }
+
+.initials-entry{
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: row;
+}
+.initials-child{
+    flex: auto;
+}
+
+/* need media queries  */

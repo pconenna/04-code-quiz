@@ -1,16 +1,18 @@
 var btnStart = document.querySelector("#btnStart");
 var answersSection = document.querySelector("#answersSection");
 var introSection = document.querySelector("#intro");
+var doneSection = document.querySelector("#doneSection");
 var questionH2 = document.querySelector("#questionH2");
 var option1 = document.querySelector("#option1");
 var option2 = document.querySelector("#option2");
 var option3 = document.querySelector("#option3");
 var option4 = document.querySelector("#option4");
 var scoreDisplay = document.querySelector("#score");
+
 var score = 0;
 var highScore = 0;
 
-var arr = [{
+var quiz = [{
     question: "Which one of these is not a real programming language?",
     choice1: "JavaScript",
     choice2: "Python",
@@ -27,10 +29,17 @@ var arr = [{
 }, {
     question: "What is a variable?",
     choice1: "A container to store data",
-    choice2: "something",
-    choice3: "something else",
-    choice4: "another wrong answer",
+    choice2: "An array",
+    choice3: "A word",
+    choice4: "A number",
     rightAnswer: "A container to store data"
+},{
+    question: "Which one of these is not a primitive data type in JavaScript?",
+    choice1: "string",
+    choice2: "number",
+    choice3: "object",
+    choice4: "boolean",
+    rightAnswer: "object"
 }]
 
 
@@ -47,7 +56,7 @@ btnStart.addEventListener("click",function(event){
 
 
  function nextQuestion(){
-    var currentQuestion = arr[questionIndex]
+    var currentQuestion = quiz[questionIndex]
     questionH2.innerHTML = currentQuestion.question;
    
     option1.setAttribute('value', currentQuestion.choice1);
@@ -64,7 +73,7 @@ btnStart.addEventListener("click",function(event){
 }
 
 function checkAnswer(event){
-    var currentQuestion = arr[questionIndex]
+    var currentQuestion = quiz[questionIndex]
     var target = event.target;
     console.log(target.value);
     questionIndex++;
@@ -73,15 +82,19 @@ function checkAnswer(event){
         score++;
         scoreDisplay.innerHTML = score;
 
-    }
+    } console.log(score);
     //check if any questions left
-    // if(questionIndex !==7){
+    if(questionIndex === quiz.length){
+        answersSection.setAttribute("class","sectionHide");
+        doneSection.setAttribute("class", "sectionShow");
 
-    // }else{
-        console.log(score);
+
+
+    }else{
+       
 
         nextQuestion();
-    // }
+    }
  }
 
  option1.addEventListener("click",checkAnswer)

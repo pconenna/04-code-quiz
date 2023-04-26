@@ -9,7 +9,6 @@
     </head>
     <body>
         <section class="container">
-            <h2> Score: <span id="score"></span></h2>
             <section id="intro" class="sectionShow">
                 <h2>Welcome to the coding quiz</h2>
                 <button id="btnStart">Start Quiz</button>
@@ -22,7 +21,16 @@
                 <button id="option3">answer</button>
                 <button id="option4">answer</button>
             </section>
-           
+           <section id="doneSection" class="sectionHide">
+            <h2>Congratulations, you finsished the quiz!</h2>
+            <p>Your score is: <span id="score"></span></p>
+            <section class="initials-entry">
+                <p class="initials-child">Enter your intials:</p>
+                <input type="text" id="intialsInput" class="initials-child"/>
+            </section>
+            
+
+           </section>
         </section>
         
 
