@@ -24,7 +24,7 @@ if (scores == null){
 }
 
 var quiz = [{
-    question: "Which one of these is used for databse programming?",
+    question: "Which one of these is used for database programming?",
     choice1: "JavaScript",
     choice2: "Python",
     choice3: "SQL",

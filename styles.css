@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     align-items: center;
 }
+
 .sectionShow{
     display: flex;
     flex: 1 1 auto;
@@ -14,7 +15,7 @@
 }
 /* made the intro narrower to make it look better for now */
 #intro{
-    width: 20%;
+    width: 50%;
     justify-self: center;
 
 }
@@ -22,20 +23,54 @@
     flex: 1 1 100%;
     width: 95%;
     margin: 1%;
+    background-color: gray;
+    color:white;
+    
+}
+
+#btnStart{
+    width: 50%;
 }
 
 .sectionHide{
     display: none;
 }
 
+/* #questionH2{
+    width: fit-content;
+} */
+
 .initials-entry{
     display: flex;
     flex: 1 1 auto;
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 .initials-child{
-    flex: auto;
+    flex: 1 1 auto;
+    width: 20%;
+    
+}
+#submit{
+    width: 20%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 /* need media queries  */
-/* take some inpiration from boostrap */
+
+@media screen and (max-width: 992px){
+    h2{
+        font-size: 1em;
+    }
+    .initials-child {
+        font-size: 12px;
+    }
+
+}
+@media screen and (max-width: 768px){
+    h2{
+        font-size: 1em;
+    }
+}
