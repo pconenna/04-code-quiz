@@ -145,16 +145,8 @@ function checkAnswer(event){
  }
 
  function sortScores(){
-    var sortedArr = [];
-    sortedArr.push(scores[0])
-    console.log(JSON.stringify(sortedArr))
-    for(var i = 1; i < scores.length; i++){
-     if(scores[i].score >= sortedArr[i-1].score){
-        sortedArr.unshift(scores[i]);
-     }else{
-        sortedArr.push(scores[i]);
-    }
+    scores.sort( (a,b) => b.score - a.score );
+    // i got the above line from https://devsheet.com/sort-array-of-objects-by-key-value-in-javascript/
+    console.log(JSON.stringify(scores));
 
-   }
-   console.log(JSON.stringify(sortedArr))
  }
