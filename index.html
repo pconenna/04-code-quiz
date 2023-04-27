@@ -9,12 +9,12 @@
     </head>
     <body>
         <section class="container">
-            <h2 id="timer">Seconds Left: <span id="timeLeft"></span></h2>
+            <h2 id="timer" style="display: none;">Seconds Left: <span id="timeLeft"></span></h2>
             <section id="intro" class="sectionShow">
                 <h2>Welcome to the coding quiz</h2>
                 <button id="btnStart">Start Quiz</button>
-
             </section>
+            
             <section id="answersSection" class="sectionHide">
                 <h2 id="questionH2">Question Goes Here</h2>
                 <button id="option1">answer</button>
@@ -35,6 +35,8 @@
             
             <section id="leaderboard" class="sectionHide">
                 <h2>Leaderboard</h2>
+                <button id="restartBtn">Go Back</button>
+                <button id="clearBtn">Clear Scores</button>
 
             </section>
         </section>
