@@ -10,9 +10,15 @@ var option4 = document.querySelector("#option4");
 var scoreDisplay = document.querySelector("#score");
 var timeLeft = document.querySelector("#timeLeft");
 var secondsLeft = 60;
+var initialsInput = document.querySelector("#initialsInput");
+var submitBtn = document.querySelector("#submit");
 
 var score = 0;
-var highScore = localStorage.getItem("highScore");
+var scores = JSON.parse(localStorage.getItem("scores")) ;
+if (scores == null){
+    scores = [];
+    localStorage.setItem("scores", JSON.stringify(scores))
+}
 
 var quiz = [{
     question: "Which one of these is not a real programming language?",
@@ -99,6 +105,7 @@ function checkAnswer(event){
  option2.addEventListener("click",checkAnswer)
  option3.addEventListener("click",checkAnswer)
  option4.addEventListener("click",checkAnswer)
+ submitBtn.addEventListener("click",addScore)
 
  function countDown(){
     var timerInterval = setInterval(function(){
@@ -117,15 +124,37 @@ function checkAnswer(event){
     },1000)
  }
 
- function checkHighScore(){
-    if(score > highScore){
-        highScore = score;
-        localStorage.setItem("highScore", highScore);
-    }
- }
+
 
  function endQuiz(){
         answersSection.setAttribute("class","sectionHide");
         doneSection.setAttribute("class", "sectionShow");
         scoreDisplay.innerHTML = score;
+ }
+
+ function addScore(){
+    console.log(JSON.stringify(scores));
+    scores.push({'initials':initialsInput.value,'score':score});
+    localStorage.setItem("scores", JSON.stringify(scores))
+    console.log(JSON.stringify(scores));
+   for(var i = 0; i < scores.length; i++){
+    console.log(`${scores[i].initials} ${scores[i].score}`)
+   }
+   
+
+ }
+
+ function sortScores(){
+    var sortedArr = [];
+    sortedArr.push(scores[0])
+    console.log(JSON.stringify(sortedArr))
+    for(var i = 1; i < scores.length; i++){
+     if(scores[i].score >= sortedArr[i-1].score){
+        sortedArr.unshift(scores[i]);
+     }else{
+        sortedArr.push(scores[i]);
+    }
+
+   }
+   console.log(JSON.stringify(sortedArr))
  }
