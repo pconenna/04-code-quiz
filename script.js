@@ -92,7 +92,7 @@ var quiz = [{
     choice2: "height",
     choice3: "flex basis",
     choice4: "size",
-    rightAnswer: "size"
+    rightAnswer: "flex basis"
 }]
 
 
@@ -110,6 +110,7 @@ btnStart.addEventListener("click",function(event){
 
 
  function nextQuestion(){
+    //displayes questions
     var currentQuestion = quiz[questionIndex]
     questionH2.innerHTML = currentQuestion.question;
    
@@ -127,11 +128,13 @@ btnStart.addEventListener("click",function(event){
 }
 
 function checkAnswer(event){
+    //cycles questions by iterating through the array
     var currentQuestion = quiz[questionIndex]
     var target = event.target;
     console.log(target.value);
     questionIndex++;
 
+    //checks to see if the value of the pressed button is the right answer
     if(target.value === currentQuestion.rightAnswer){
         score++;
 
@@ -174,6 +177,7 @@ function checkAnswer(event){
 
 
  function endQuiz(){
+    //goes to the section to submit score 
         answersSection.setAttribute("class","sectionHide");
         timer.setAttribute("class","sectionHide")
         doneSection.setAttribute("class", "sectionShow");
@@ -181,12 +185,14 @@ function checkAnswer(event){
  }
 
  function addScore(){
+    //addsocres to array in local storage
     doneSection.setAttribute("class", "sectionHide");
     leaderboard.setAttribute("class", "sectionShow");
     scores.push({'initials':initialsInput.value,'score':score});
     localStorage.setItem("scores", JSON.stringify(scores));
     scores.sort( (a,b) => b.score - a.score );
     // i got the above line from https://devsheet.com/sort-array-of-objects-by-key-value-in-javascript/
+    //dynamically generate the leaderboard
     for( var i = 0; i < scores.length; i++){
         var tag1 = document.createElement("h2");
         tag1.setAttribute("class", "scoreH2");
@@ -203,6 +209,7 @@ clearBtn.addEventListener("click", clearScores);
 restartBtn.addEventListener("click", restartQuiz);
 
 function restartQuiz(){
+    //reset all of the variables that got changes during the quiz to the values they need to be at the start
     leaderboard.setAttribute("class", "sectionHide");
     introSection.setAttribute("class", "sectionShow");
     secondsLeft = 60;
@@ -216,10 +223,18 @@ function restartQuiz(){
         scores = [];
         localStorage.setItem("scores", JSON.stringify(scores))
     }
+    //i realized i have to destroy the leaderboard after every restart or there will be repeat values 
+    var tags = document.querySelectorAll(".scoreH2");
+    for(var i = 0; i < tags.length; i++){
+        tags[i].remove();
+    }
+
+
 
 }
 
 function clearScores(){
+    //reset the lcoal storage array and destroy the leaderboard
     localStorage.clear();
     var tags = document.querySelectorAll(".scoreH2");
     console.log(tags);

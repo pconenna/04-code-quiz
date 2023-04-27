@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     align-items: center;
 }
-
+/* have classes to show and hide sections this gives the appearance of cycling through pages */
 .sectionShow{
     display: flex;
     flex: 1 1 auto;
@@ -13,7 +13,10 @@
     width: 50%;
     align-items: center;
 }
-/* made the intro narrower to make it look better for now */
+.sectionHide{
+    display: none;
+}
+/* made the intro narrower to make it look better */
 #intro{
     width: 50%;
     justify-self: center;
@@ -31,14 +34,9 @@
 #btnStart{
     width: 50%;
 }
+/* the width of the buttons helps them resize with their container */
 
-.sectionHide{
-    display: none;
-}
 
-/* #questionH2{
-    width: fit-content;
-} */
 
 .initials-entry{
     display: flex;
@@ -58,7 +56,7 @@
     margin-right: 0;
 }
 
-/* need media queries  */
+/* media queries  */
 
 @media screen and (max-width: 992px){
     h2{
