@@ -9,9 +9,11 @@ var option3 = document.querySelector("#option3");
 var option4 = document.querySelector("#option4");
 var scoreDisplay = document.querySelector("#score");
 var timeLeft = document.querySelector("#timeLeft");
+var timerH2 = document.querySelector("#timer");
 var secondsLeft = 60;
 var initialsInput = document.querySelector("#initialsInput");
 var submitBtn = document.querySelector("#submit");
+var leaderboard = document.querySelector("#leaderboard")
 
 var score = 0;
 var scores = JSON.parse(localStorage.getItem("scores")) ;
@@ -128,25 +130,29 @@ function checkAnswer(event){
 
  function endQuiz(){
         answersSection.setAttribute("class","sectionHide");
+        timer.setAttribute("class","sectionHide")
         doneSection.setAttribute("class", "sectionShow");
         scoreDisplay.innerHTML = score;
  }
 
  function addScore(){
-    console.log(JSON.stringify(scores));
+    doneSection.setAttribute("class", "sectionHide");
+    leaderboard.setAttribute("class", "sectionShow")
     scores.push({'initials':initialsInput.value,'score':score});
-    localStorage.setItem("scores", JSON.stringify(scores))
-    console.log(JSON.stringify(scores));
-   for(var i = 0; i < scores.length; i++){
-    console.log(`${scores[i].initials} ${scores[i].score}`)
-   }
-   
-
- }
-
- function sortScores(){
+    localStorage.setItem("scores", JSON.stringify(scores));
     scores.sort( (a,b) => b.score - a.score );
     // i got the above line from https://devsheet.com/sort-array-of-objects-by-key-value-in-javascript/
-    console.log(JSON.stringify(scores));
+    for( var i = 0; i < scores.length; i++){
+        var tag1 = document.createElement("h2");
+        var tag2 = document.createElement("span");
+        tag1.textContent = scores[i].initials+ ": ";
+        tag2.textContent = scores[i].score;
+        leaderboard.appendChild(tag1);
+        tag1.appendChild(tag2);
+
+    }
+
+   
+   
 
  }
